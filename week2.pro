@@ -205,7 +205,7 @@ pro restore_5_3_add_0deg
   v_sample = 62.5e6 ;Hz
   restore, 'week_2_5_3_add_0deg.sav'
   ps_ch, 'week_2_5_3_add_0deg.ps'
-  plot, time*1e6, sig[100:N+99], color = !yellow, title = "USB Graph for 0 Degree Phase Shift. Real: Yellow. Imaginary: Blue Dotted.", xtitle = 'Time (seconds)', ytitle = 'Real and Imaginary Values', charsize = 1.5
+  plot, time*1e6, sig[100:N+99], color = !black, title = "USB Graph for 0 Degree Phase Shift. Real: Black. Imaginary: Blue Dotted.", xtitle = 'Time (seconds)', ytitle = 'Real and Imaginary Values', charsize = 1.5
   oplot, time*1e6, shift[100:N+99], color = !blue, psym = -4
   plot, xoutput/1e6, power, psym = -4, charsize = 1.5, title = textoidl('Power Spectrum for \deltaw > 0'), xtitle = 'Frequency (megahertz)', ytitle = 'Power'
   ps_ch, /close
@@ -241,7 +241,7 @@ pro restore_5_3_subtract_0deg
   v_sample = 62.5e6 ;Hz
   restore, 'week_2_5_3_subtract_0deg.sav'
   ps_ch, 'week_2_5_3_subtract_0deg.ps', xsize=10, ysize=10, /color
-  plot, time*1e6, sig[100:N+99], color = !yellow, title = "LSB Graph for 0 Degree Phase Shift. Real: Yellow. Imaginary: Blue Dotted.", xtitle = 'Time (microseconds)', ytitle = 'Real and Imaginary Values', charsize = 1.5
+  plot, time*1e6, sig[100:N+99], color = !black, title = "LSB Graph for 0 Degree Phase Shift. Real: Black. Imaginary: Blue Dotted.", xtitle = 'Time (microseconds)', ytitle = 'Real and Imaginary Values', charsize = 1.5
   oplot, time*1e6, shift[100:N+99], color = !blue, psym = -4
   plot, xoutput/1e6, power, psym = -4, charsize = 1.5, title = textoidl('Power Spectrum for \deltaw < 0'), xtitle = 'Frequency (megahertz)', ytitle = 'Power'
   ps_ch, /close
@@ -277,7 +277,7 @@ pro restore_5_3_add_90deg
  v_sample = 62.5e6 ;Hz
  restore, 'week_2_5_3_add_90deg.sav'
  ps_ch, 'week_2_5_3_add_90deg.ps', xsize=10, ysize=10, /color
- plot, time*1e6, sig[100:N+99], color = !yellow, title = "USB Graph for 90 Degree Phase Shift. Real: Yellow. Imaginary: Blue Dotted.", xtitle = 'Time (microseconds)', ytitle = 'Real and Imaginary Values', charsize = 1.5
+ plot, time*1e6, sig[100:N+99], color = !black, title = "USB Graph for 90 Degree Phase Shift. Real: Black. Imaginary: Blue Dotted.", xtitle = 'Time (microseconds)', ytitle = 'Real and Imaginary Values', charsize = 1.5
  oplot, time*1e6, shift[100:N+99], color = !blue, psym = -4
  plot, xoutput/1e6, power, psym = -4, charsize = 1.5, title = textoidl('Power Spectrum for \deltaw > 0'), xtitle = 'Frequency (megahertz)', ytitle = 'Power'
  ps_ch, /close
@@ -313,7 +313,7 @@ pro restore_5_3_subtract_90deg
  v_sample = 62.5e6 ;Hz
  restore, 'week_2_5_3_subtract_90deg.sav'
  ps_ch, 'week_2_5_3_subtract_90deg.ps', xsize=10, ysize=10, /color
- plot, time*1e6, sig[100:N+99], color = !yellow, title = "LSB Graph for 90 Degree Phase Shift. Real: Yellow. Imaginary: Blue Dotted.", xtitle = 'Time (microseconds)', ytitle = 'Real and Imaginary Values', charsize = 1.5
+ plot, time*1e6, sig[100:N+99], color = !black, title = "LSB Graph for 90 Degree Phase Shift. Real: Black. Imaginary: Blue Dotted.", xtitle = 'Time (microseconds)', ytitle = 'Real and Imaginary Values', charsize = 1.5
  oplot, time*1e6, shift[100:N+99], color = !blue, psym = -4
  plot, xoutput/1e6, power, psym = -4, charsize = 1.5, title = textoidl('Power Spectrum for \deltaw < 0'), xtitle = 'Frequency (megahertz)', ytitle = 'Power'
  ps_ch, /close

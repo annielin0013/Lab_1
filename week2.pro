@@ -29,9 +29,12 @@ end
 
 pro restore_5_1_add
 ;restore and plot tseries for v_rf = 2.0 MHz, v_lo = 2.0+0.1 MHz 
+  !p.multi=[0,1,1]
   N = 2048.
   restore, 'week_2_5_1_add.sav'
-  plot, time*1e6, tseries[100:N+100-1], psym = -4, charsize = 1.5, title = 'voltage vs. time + delta v', xtitle = 'time (microsec)', ytitle = 'voltage (V)'
+  ps_ch, 'week_2_5_1_add.ps', xsize=10, ysize=10, /color
+  plot, time*1e6, tseries[100:N+100-1], psym = -4, charsize = 1.5, title = textoidl('Voltage vs. Time +\delta\nu'), xtitle = 'Time (microseconds)', ytitle = 'Voltage (V)'
+  ps_ch, /close
 end
 
 pro get_5_1_subtract
@@ -46,9 +49,12 @@ end
 
 pro restore_5_1_subtract
 ;restore and plot tseries for v_rf = 2.0 MHz, v_lo = 2.0-0.1 MHz 
+  !p.multi=[0,1,1]
   N = 2048.
   restore, 'week_2_5_1_subtract.sav'
-  plot, time* 1e6, tseries[100:N+100-1], psym = -4, charsize = 1.5, title = 'voltage vs. time - delta v', xtitle = 'time (microsec)', ytitle = 'voltage (V)'
+  ps_ch, 'week_2_5_1_subtract.ps', xsize=10, ysize=10, /color
+  plot, time*1e6, tseries[100:N+100-1], psym = -4, charsize = 1.5, title = textoidl('Voltage vs. Time -\delta\nu'), xtitle = 'Time (microseconds)', ytitle = 'Voltage (V)'
+  ps_ch, /close
 end
 
 pro get_5_1_ft_add
@@ -71,10 +77,12 @@ end
 pro restore_5_1_ft_add
 ;for v_rf = 2.0 MHz, v_lo = 2.0+0.1 MHz
 ;restore and plot power spectrum for +delta v (positive)
-  !p.multi = [0,1,2]
-  restore, 'week_2_5_1_ft_add.sav'
-  plot, xoutput/1e6, youtput, psym = -4, charsize = 1.5, title = 'DFT of + delta v', xtitle = 'frequency (MHz)', ytitle = 'real values'
-  plot, xoutput/1e6, power, psym = -4, charsize = 1.5, title = 'Power Spectrum of + delta v', xtitle = 'frequency (MHz)', ytitle = 'power', xrange = [-5,5]
+ !p.multi = [0,1,2]
+ restore, 'week_2_5_1_ft_add.sav'
+ ps_ch, 'week_2_5_1_ft_add.ps', xsize=10, ysize=10, /color
+ plot, xoutput/1e6, youtput, psym = -4, charsize = 1.5, title = textoidl('DFT of +\delta\nu'), xtitle = 'Frequency (megahertz)', ytitle = 'Real Values'
+ plot, xoutput/1e6, power, psym = -4, charsize = 1.5, title = textoidl('Power Spectrum of +\delta\nu'), xtitle = 'Frequency (megahertz)', ytitle = 'Power', xrange = [-5,5]
+ ps_ch, /close
 end
 
 pro get_5_1_ft_subtract
@@ -97,10 +105,12 @@ end
 pro restore_5_1_ft_subtract
 ;for v_rf = 2.0 MHz, v_lo = 2.0-0.1 MHz
 ;restore and plot power spectrum for -delta v (negative)
-  !p.multi = [0,1,2]
-  restore, 'week_2_5_1_ft_subtract.sav'
-  plot, xoutput/1e6, youtput, psym = -4, charsize = 1.5, title = 'DFT of - delta v', xtitle = 'frequency (MHz)', ytitle = 'real values'
-  plot, xoutput/1e6, power, psym = -4, charsize = 1.5, title = 'Power Spectrum of - delta v', xtitle = 'frequency (MHz)', ytitle = 'power', xrange = [-5,5]
+ !p.multi = [0,1,2]
+ restore, 'week_2_5_1_ft_subtract.sav'
+ ps_ch, 'week_2_5_1_ft_subtract.ps', xsize=10, ysize=10, /color
+ plot, xoutput/1e6, youtput, psym = -4, charsize = 1.5, title = textoidl('DFT of -\delta\nu'), xtitle = 'Frequency (megahertz)', ytitle = 'Real Values'
+ plot, xoutput/1e6, power, psym = -4, charsize = 1.5, title = textoidl('Power Spectrum of -\delta\nu'), xtitle = 'Frequency (megahertz)', ytitle = 'Power', xrange = [-5,5]
+ ps_ch, /close
 end
 
 pro get_5_1_ift_add
@@ -133,7 +143,8 @@ pro restore_5_1_ift_add
   !p.multi = [0,1,3]
   N = 2048.
   restore, 'week_2_5_1_add.sav'
-  plot, time*1e6, tseries[100:N+100-1], psym = -4, charsize = 1.5, title = 'voltage vs. time + delta v', xtitle = 'time (microsec)', ytitle = 'voltage (V)'
+  ps_ch, 'week_2_5_1_ift_add.ps', xsize=10, ysize=10, /color
+  plot, time*1e6, tseries[100:N+100-1], psym = -4, charsize = 1.5, title = textoidl('Voltage vs. Time +\delta\nu'), xtitle = 'Time (microseconds)', ytitle = 'Voltage (V)'
  
 ;filter out sum of frequencies by zeroing anything smaller than -.2 Mhz
 ;or greater than .2 MHz
@@ -145,10 +156,11 @@ pro restore_5_1_ift_add
      endif
   endfor
 
-  plot, xoutput/1e6, (abs(youtput1))^2, psym = -4, xrange = [-1,1], charsize = 1.5, title = 'Power Spectrum Filtered + delta v', xtitle = 'frequency (MHz)', ytitle = 'power'
+  plot, xoutput/1e6, (abs(youtput1))^2, psym = -4, xrange = [-1,1], charsize = 1.5, title = textoidl('Power Spectrum Filtered +\delta\nu'), xtitle = 'Frequency (megahertz)', ytitle = 'Power'
 
   restore, 'week_2_5_1_ift_add.sav'
-  plot, time*1e6, filtered_y, psym = -4, charsize = 1.5, title = 'voltage vs. time + delta v', xtitle = 'time (microsec)', ytitle = 'voltage (V)'
+  plot, time*1e6, filtered_y, psym = -4, charsize = 1.5, title = textoidl('Voltage vs. Time +\delta\nu'), xtitle = 'Time (microseconds)', ytitle = 'Voltage (V)'
+  ps_ch, /close
 end
 
 pro restore_5_2_power_add
@@ -156,9 +168,11 @@ pro restore_5_2_power_add
 ;restore & plot power spectrum with y-axis gain turned up
 ;we should only see peaks at 0.1 MHz and 4.1 Mhz, but we see many
 ;intermodulation products
-  !p.multi = [0,1,1]
-  restore, 'week_2_5_1_ft_add.sav'
-  plot, xoutput/1e6, power, psym = -4, charsize = 1.5, title = 'Forest of Lines', xtitle = 'frequency (MHz)', ytitle = 'power', xrange = [0,10], yrange = [0,.1] ;y-axis gain turned up
+ !p.multi = [0,1,1]
+ restore, 'week_2_5_1_ft_add.sav'
+ ps_ch, 'week_2_5_2_power_add.ps', xsize=10, ysize=10, /color
+ plot, xoutput/1e6, power, psym = -4, charsize = 1.5, title = 'Forest of Lines', xtitle = 'Frequency (megahertz)', ytitle = 'Power', xrange = [0,10], yrange = [0,.1] ;y-axis gain turned up
+ ps_ch, /close
 end
 
 pro get_5_3_add_0deg
@@ -190,9 +204,11 @@ pro restore_5_3_add_0deg
   N = 1024.
   v_sample = 62.5e6 ;Hz
   restore, 'week_2_5_3_add_0deg.sav'
-  plot, time*1e6, sig[100:N+99], color = !yellow, title = "USB graph for 0 degree phase shift. Real: yellow. Imaginary: blue dotted.", xtitle = 'time (sec)', ytitle = 'real (yellow) and imaginary (blue) values', charsize = 1.5
+  ps_ch, 'week_2_5_3_add_0deg.ps'
+  plot, time*1e6, sig[100:N+99], color = !yellow, title = "USB Graph for 0 Degree Phase Shift. Real: Yellow. Imaginary: Blue Dotted.", xtitle = 'Time (seconds)', ytitle = 'Real and Imaginary Values', charsize = 1.5
   oplot, time*1e6, shift[100:N+99], color = !blue, psym = -4
-  plot, xoutput/1e6, power, psym = -4, charsize = 1.5, title = 'Power Spectrum for delta w > 0', xtitle = 'frequency (MHz)', ytitle = 'power'
+  plot, xoutput/1e6, power, psym = -4, charsize = 1.5, title = textoidl('Power Spectrum for \deltaw > 0'), xtitle = 'Frequency (megahertz)', ytitle = 'Power'
+  ps_ch, /close
 end
 
 pro get_5_3_subtract_0deg
@@ -224,9 +240,11 @@ pro restore_5_3_subtract_0deg
   N = 1024.
   v_sample = 62.5e6 ;Hz
   restore, 'week_2_5_3_subtract_0deg.sav'
-  plot, time*1e6, sig[100:N+99], color = !yellow, title = "LSB graph for 0 degree phase shift. Real: white. Imaginary: blue dotted.", xtitle = 'time (microsec)', ytitle = 'real (yellow) and imaginary (blue) values', charsize = 1.5
+  ps_ch, 'week_2_5_3_subtract_0deg.ps', xsize=10, ysize=10, /color
+  plot, time*1e6, sig[100:N+99], color = !yellow, title = "LSB Graph for 0 Degree Phase Shift. Real: Yellow. Imaginary: Blue Dotted.", xtitle = 'Time (microseconds)', ytitle = 'Real and Imaginary Values', charsize = 1.5
   oplot, time*1e6, shift[100:N+99], color = !blue, psym = -4
-  plot, xoutput/1e6, power, psym = -4, charsize = 1.5, title = 'Power Spectrum for delta w < 0', xtitle = 'frequency (MHz)', ytitle = 'power'
+  plot, xoutput/1e6, power, psym = -4, charsize = 1.5, title = textoidl('Power Spectrum for \deltaw < 0'), xtitle = 'Frequency (megahertz)', ytitle = 'Power'
+  ps_ch, /close
 end
 
 pro get_5_3_add_90deg
@@ -254,13 +272,15 @@ end
 pro restore_5_3_add_90deg
 ;for v_rf = 10.5 MHz, v_lo = 10 MHz
 ;restore & plot for 90 degree phase shifted signals, +delta v (positive)
-  !p.multi = [0,1,2]
-  N = 1024.
-  v_sample = 62.5e6 ;Hz
-  restore, 'week_2_5_3_add_90deg.sav'
-  plot, time*1e6, sig[100:N+99], color = !yellow, title = "USB graph for 90 degree phase shift. Real: yellow. Imaginary: blue dotted.", xtitle = 'time (microsec)', ytitle = 'real (yellow) and imaginary (blue) values', charsize = 1.5
-  oplot, time*1e6, shift[100:N+99], color = !blue, psym = -4
-  plot, xoutput/1e6, power, psym = -4, charsize = 1.5, title = 'Power Spectrum for delta w > 0', xtitle = 'frequency (MHz)', ytitle = 'power'
+ !p.multi = [0,1,2]
+ N = 1024.
+ v_sample = 62.5e6 ;Hz
+ restore, 'week_2_5_3_add_90deg.sav'
+ ps_ch, 'week_2_5_3_add_90deg.ps', xsize=10, ysize=10, /color
+ plot, time*1e6, sig[100:N+99], color = !yellow, title = "USB Graph for 90 Degree Phase Shift. Real: Yellow. Imaginary: Blue Dotted.", xtitle = 'Time (microseconds)', ytitle = 'Real and Imaginary Values', charsize = 1.5
+ oplot, time*1e6, shift[100:N+99], color = !blue, psym = -4
+ plot, xoutput/1e6, power, psym = -4, charsize = 1.5, title = textoidl('Power Spectrum for \deltaw > 0'), xtitle = 'Frequency (megahertz)', ytitle = 'Power'
+ ps_ch, /close
 end
 
 pro get_5_3_subtract_90deg
@@ -288,11 +308,13 @@ end
 pro restore_5_3_subtract_90deg
 ;for v_rf = 9.5 MHz, v_lo = 10 MHz
 ;restore & plot for 90 degree phase shifted signals, -delta v (negative)
-  !p.multi = [0,1,2]
-  N = 1024.
-  v_sample = 62.5e6 ;Hz
-  restore, 'week_2_5_3_subtract_90deg.sav'
-  plot, time*1e6, sig[100:N+99], color = !yellow, title = "LSB graph for 90 degree phase shift. Real: yellow. Imaginary: blue dotted.", xtitle = 'time (microsec)', ytitle = 'real (yellow) and imaginary (blue) values', charsize = 1.5
-  oplot, time*1e6, shift[100:N+99], color = !blue, psym = -4
-  plot, xoutput/1e6, power, psym = -4, charsize = 1.5, title = 'Power Spectrum for delta w < 0', xtitle = 'frequency (MHz)', ytitle = 'power'
+ !p.multi = [0,1,2]
+ N = 1024.
+ v_sample = 62.5e6 ;Hz
+ restore, 'week_2_5_3_subtract_90deg.sav'
+ ps_ch, 'week_2_5_3_subtract_90deg.ps', xsize=10, ysize=10, /color
+ plot, time*1e6, sig[100:N+99], color = !yellow, title = "LSB Graph for 90 Degree Phase Shift. Real: Yellow. Imaginary: Blue Dotted.", xtitle = 'Time (microseconds)', ytitle = 'Real and Imaginary Values', charsize = 1.5
+ oplot, time*1e6, shift[100:N+99], color = !blue, psym = -4
+ plot, xoutput/1e6, power, psym = -4, charsize = 1.5, title = textoidl('Power Spectrum for \deltaw < 0'), xtitle = 'Frequency (megahertz)', ytitle = 'Power'
+ ps_ch, /close
 end

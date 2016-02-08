@@ -65,6 +65,7 @@ end
 
 pro restore_plot_3_2_ft, a
 ;restore and plot DFT for v_sig/v_sample = ratio given by 'a'
+  !p.multi=[0,1,1]
   ratio = a *0.1
   restore, 'week_1_3_2_ft_'+strcompress(string(ratio), /remove_all)+'.sav'
   ps_ch, 'week_1_3_2_ft_'+strcompress(string(ratio), /remove_all)+'.ps', xsize=10, ysize=10, /color
